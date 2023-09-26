@@ -10,6 +10,7 @@
 #    to respect above requirements (this script will be run on the server itself)
 #   You can’t use systemctl for restarting nginx
 
+
 # Installs nginx server
 apt-get update
 apt-get -y install nginx
