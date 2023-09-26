@@ -1,18 +1,42 @@
 #!/usr/bin/env bash
 # Installs nginx server
 # Requirements:
-#   -Install nginx on your web-01
-#   -server
-#   -Nginx should be listening on port 80
-#   -When querying Nginx at its root / with a GET request (requesting a page)
-#     using curl,bit must return a page that contains the string Hello World!
-#   -As an answer file, write a Bash script that configures a new Ubuntu
-#     machine to respect above requirements (this script will be run on the
-#     server itself)
-#   -You can’t use systemctl for restarting nginx*
+#   Install nginx on your web-01
+#   server
+#   Nginx should be listening on port 80
+#   When querying Nginx at its root / with a GET request (requesting a page) using curl,
+#      it must return a page that contains the string Hello World!
+#   As an answer file, write a Bash script that configures a new Ubuntu machine to respect above requirements (this script will be run on the server itself)
+#   You can’t use systemctl for restarting nginx*
 
-apt-get update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+# Instal nginx:
+sudo apt update
+sudo apt install -y nginx
+
+# Create default nginx folder for pages:
+sudo mkdir -p /var/www/html
+
+# Create default index.html file:
+sudo touch /var/www/html/index
+sudo touch /var/www/html/index.html
+sudo touch /var/www/html/index.htm
+sudo touch /var/www/html/index.nginx-debian.html
+
+# Change ownership of file and directories to current user
+# in order to edit the file.
+sudo chown -R "$USER":"$USER" /var/www/html/index
+sudo chown -R "$USER":"$USER" /var/www/html/index.html
+sudo chown -R "$USER":"$USER" /var/www/html/index.htm
+sudo chown -R "$USER":"$USER" /var/www/html/index.nginx-debian.html
+
+# Append hello world to file:
+echo "Hello World!" > /var/www/html/index
+echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.htm
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-service nginx start
+
+# add to firewall:
+sudo ufw allow 'Nginx HTTP'
+
+# start nginx server:
+sudo service nginx restart
