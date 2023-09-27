@@ -16,10 +16,10 @@ sudo apt-get update
 sudo apt-get -y install nginx
 
 # add to firewall
-sudo ufw allow 'Nginx HTTP'
+sudo ufw 'Nginx HTTP'
 
 # Append hello world to file
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 sudo inginx -t
 
