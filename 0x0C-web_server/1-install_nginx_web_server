@@ -13,6 +13,6 @@ echo "Hello World!" | sudo tee /var/www/html/index.html
 sudo inginx -t
 
 # start nginx server
-sudo service nginx start
+sudo service nginx restart
 
 sudo service nginx reload
