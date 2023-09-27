@@ -12,14 +12,18 @@
 
 
 # Installs nginx server
-apt-get update
-apt-get -y install nginx
+sudo apt-get update
+sudo apt-get -y install nginx
 
 # add to firewall
-ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTP'
 
 # Append hello world to file
 echo "Hello World!" > /var/www/html/index.html
 
+sudo inginx -t
+
 # start nginx server
-service nginx start
+sudo service nginx restart
+
+sudo service nginx reload
