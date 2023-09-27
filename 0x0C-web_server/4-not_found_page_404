@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Configure Nginx server to have a custom 404 page that contains the string
+# Install nginx with custom 404 page that contains the string
+# Ceci n'est pas une page.
+
+# Install nginx
+sudo apt update
+sudo apt install -y nginx
+
+# Add custom 404 error page to /etc/nginx/sites-enabled/default at line 53
+# code to redirect a specific endpoint
+sudo sed -i "53s/.*/\t\terror_page 404 \/custom_404.html;\n\t\tlocation \/custom_404.html {\n\t\t\t\troot \/var\/www\/html;\n\t\t\t\tinternal;\n\t\t}/" /etc/nginx/sites-enabled/default
+
+# Create default nginx folder for pages
+sudo mkdir -p /var/www/html
+
+# Create custom_404.html file
+# code to create error page and add a redirect for error 404
+sudo touch /var/www/html/custom_404.html
+
+# Change file ownership to current user to allow editing
+sudo chown -R "$USER":"$USER" /var/www/html/custom_404.html
+
+# Overwite file content
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+
+# Restart nginx server
+sudo service nginx restart
