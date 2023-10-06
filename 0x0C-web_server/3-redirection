@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 # Set up a permanent redirect.
 # Script that configures a new Ubuntu machine to respect above requirements.
-
 # Instal nginx
 sudo apt-get update
 sudo apt-get install -y nginx
-
 # Add redirect command to nginx config on line 53
 sudo sed -i "53s/.*/location \/redirect_me {\n\treturn 301 http:\/\/github.com\/\;\n}/" /etc/nginx/sites-available/default
-
 sudo service nginx restart
