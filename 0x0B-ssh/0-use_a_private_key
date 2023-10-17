@@ -6,4 +6,4 @@
 #     You cannot use -l
 #     You do not need to handle the case of a private key protected by a passphrase.
 
-ssh ubuntu@100.25.19.204 -i ~/.ssh/school
+ssh ubuntu@54.160.117.237 -i ~/.ssh/school
