@@ -1,3 +1,5 @@
+# The MySQL  Server configuration file.
+#
 [mysqld]
 pid-file        = /var/run/mysqld/mysqld.pid
 socket          = /var/run/mysqld/mysqld.sock
