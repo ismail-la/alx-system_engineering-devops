@@ -22,7 +22,7 @@ if __name__ == '__main__':
     todoUrl = url + "/todos"
     response = requests.get(todoUrl)
     tasks = response.json()
-    dictionary = {employeeId: []}
+    dictionary = {employee_Id: []}
     for task in tasks:
         dictionary[employee_Id].append({
             "task": task.get('title'),
