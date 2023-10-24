@@ -22,7 +22,7 @@ if __name__ == '__main__':
     dictionary = {}
     for user in users:
         user_id = user.get('id')
-        usern_ame = user.get('user_name')
+        username = user.get('username')
         url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
         url = url + '/todos/'
         response = requests.get(url)
@@ -32,7 +32,7 @@ if __name__ == '__main__':
             dictionary[user_id].append({
                 "task": task.get('title'),
                 "completed": task.get('completed'),
-                "user_name": user_name
+                "username": username
             })
     with open('todo_all_employees.json', 'w') as file:
         json.dump(dictionary, file)
