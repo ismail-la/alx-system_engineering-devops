@@ -1,6 +1,24 @@
-#!/usr/bin/env bash
-# Gracefully reloads Gunicorn.
-# Terminate gunicorn processes gracefully by sending HUP signal to master
-# process.
+[Unit]
+Description=Gunicorn instance to serve AirBnB_clone_v4 web_dynamic/2-hbnb.py
+# Start after the network is available
+After=network.target
 
-sudo kill -HUP "$(pgrep -o gunicorn)"
+[Service]
+# Set working directory
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+# Start gunicorn with 3 workers, binding to 0.0.0.0:5000, log errors to /tmp/airbnb-error.log
+ExecStart=gunicorn --workers=3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app --error-logfile /tmp/airbnb-error.log
+# ExecStop=pkill -f gunicorn
+
+# Restart the service if it fails
+Restart=always
+# Redirect standar output to syslog
+StandarOutput=append:/tmp/airbnb-access.log
+# Redirect standar error to syslog
+StandarError=append:/tmp/airbnb-error.log
+# Identifier for syslog msgs messages
+SyslogIdentifier=gunicorn
+
+[Install]
+# Enable the service for multi-user.target
+WantedBy = multi-user.target
