@@ -3,9 +3,11 @@
 
 
 # Increase the ULIMIT of the default file.
-exec { 'Set nginx_limit':
-  command => 'sed -i "s/15/4096/" /etc/default/nginx',
+exec { 'Set nginx limit':
+  command => 'sudo -S sed -i "s/15/4096/g" /etc/default/nginx',
   path    => '/usr/local/bin/:/bin/'
+  refreshonly => true,
+  subscribe   => File['/etc/default/nginx'],
 }
 
 # Restart Nginx.
